@@ -24,8 +24,7 @@ typedef struct lbc_query_s lbc_query_t;
  * define des function
  */
 
-int lbcUrl(lbc_query_t lbcq, char *url);
-
+char *lbcNewUrl(lbc_query_t lbcq);
 
 /*
  * def adresse root

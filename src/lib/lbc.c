@@ -3,28 +3,19 @@
 #include <string.h>
 #include <lbc.h>
 
-int lbcUrl(lbc_query_t lbcq, char *url) {
+// return new url and malloc url
+char *lbcNewUrl(lbc_query_t lbcq) {
+	char *url = NULL;
 	size_t ulen = strlen(ROOT_URL) + 
-				sizeof('/') + 
-				strlen("/offres/") + 
-				strlen(lbcq.region) + 
-				strlen("&q=") + 
-				strlen(lbcq.query) + 1;  
-	printf("%d\n", (int)ulen);
-	if(NULL != ((char *) realloc(url, sizeof(char) * ulen))) {
-		sprintf(url, "%s/%s/offres/%s/?q=%s", ROOT_URL, lbcq.categorie, lbcq.region, lbcq.query);
-		return 0;
-	}else{
-		return -1;
-	}
-}
+					strlen(lbcq.categorie) + 
+					strlen(lbcq.region) + 
+					strlen(lbcq.query) + 
+					strlen("//offres//?q=") + 1;
 
-int getUrl(char *url, const char *query, const char *region) {
-	int url_len = strlen(ROOT_URL) + strlen(region) + strlen(query) + 1;
-	if(NULL != ((char *) realloc(url, sizeof(char) * url_len))) {
-		sprintf(url, "%s/%s/?q=%s", ROOT_URL, region, query);
-		return 0;
-	} else {
-		return -1;
+	if(NULL != (url = malloc(sizeof(char)*ulen))) {
+		sprintf(url, "%s/%s/offres/%s/?q=%s", ROOT_URL, lbcq.categorie, lbcq.region, lbcq.query);
+		return url;
+	}else{
+		return NULL;
 	}
 }
