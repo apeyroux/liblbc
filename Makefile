@@ -5,7 +5,7 @@ main:
 	gcc -Wall -g -shared -o $(PREFIX)/lib/liblbc.so $(PREFIX)/lib/lbc.o 
 	ls $(PREFIX)/lib
 	#gcc -Wall -g -o lbc -L$(PREFIX)/lib -I$(PREFIX)/src/lib -llbc `xml2-config --cflags` `xml2-config --libs` main.c
-	gcc -L lib/ -Wall -o bin/lbc main.c -llbc -I src/lib/
+	gcc -L lib/ -Wall -g -o bin/lbc main.c -llbc -I src/lib/
 
 clean:
 	rm lib/*
