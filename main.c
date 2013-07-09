@@ -49,6 +49,11 @@ int main(int ac, char **av) {
 		}
 	}
 
+	if(NULL == categorie) {
+		categorie = (char *) malloc(sizeof(strlen("-")+1));
+		categorie = strdup("-");
+	}
+
 	if((NULL == query) || (NULL == categorie) || (NULL == region)) {
 		fprintf(stderr, "error: you should specify query and categorie and region. Please read usage (-h).\n");
 		return EXIT_FAILURE;
@@ -69,7 +74,7 @@ int main(int ac, char **av) {
 		return EXIT_FAILURE;
 	}
 
-	fprintf(stdout, "url: %s\n", url);
+	fprintf(stdout, "%s\n", url);
 
 	free(url);
 	free(categorie);
