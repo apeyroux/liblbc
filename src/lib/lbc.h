@@ -1,29 +1,37 @@
 /*
- * define des function
- */
-
-int getUrl(char *url, const char *query, const char *region);
-void testFunction();
-
-/*
  * def des structs
  */
 
-struct annonce_s {
+struct lbc_query_s {
+	char *categorie;
+	char *region;
+	char *query;
+};
+
+struct lbc_annonce_s {
 	char *title;
 	char *number;
 	char *description;
-	struct annonce_t *pPrev;
-	struct annonce_t *pNext;
+	char *url;
+	struct annonce_s *prev;
+	struct annonce_s *next;
 };
 
-typedef struct annonce_s annonce_t;
+typedef struct lbc_annonce_s lbc_annonce_t;
+typedef struct lbc_query_s lbc_query_t;
+
+/*
+ * define des function
+ */
+
+int lbcUrl(lbc_query_t lbcq, char *url);
+
 
 /*
  * def adresse root
  */
 
-#define ROOT_URL "http://www.leboncoin.fr/annonces/offres"
+#define ROOT_URL "http://www.leboncoin.fr"
 
 /*
  * def des exports
@@ -31,7 +39,7 @@ typedef struct annonce_s annonce_t;
 
 #define TO_TXT 0
 #define TO_HTML 1
-#define TO_PDF 1
+#define TO_PDF 2
 
 /*
  * def des regions
@@ -68,59 +76,59 @@ typedef struct annonce_s annonce_t;
  * def des categories
  */
 
-#define CATEGO_ALL 0
-#define CATEGO_VEHICULES 1
-#define CATEGO_VOITURES 2
-#define CATEGO_MOTO 3
-#define CATEGO_CARAVANING 4
-#define CATEGO_UTILITAIRES 5
-#define CATEGO_EQUIPEMENT_AUTO 6
-#define CATEGO_EQUIPEMENT_MOTO 44
-#define CATEGO_EQUIPEMENT_CARAVANING 50
-#define CATEGO_NAUTISME 7
-#define CATEGO_EQUIPEMENT_NAUTISME 51
-#define CATEGO_IMMOBILIER 8
-#define CATEGO_VENTE_IMMOBILIERES 8
-#define CATEGO_LOCATION 10
-#define CATEGO_COLOCATION 11
-#define CATEGO_LOCATION_VACANCES 12
-#define CATEGO_BUREAUX_COMMERCES 13
-#define CATEGO_MULTIMEDIA 14
-#define CATEGO_CONSOLES_JEUX_VIDEO 43
-#define CATEGO_INFORMATIQUE 15
-#define CATEGO_IMAGE_SON 16
-#define CATEGO_TELEPHONIE 17
-#define CATEGO_MAISON 18
-#define CATEGO_AMEUBLEMENT 19
-#define CATEGO_ELECTROMENAGER 20
-#define CATEGO_ART_TABLE 45
-#define CATEGO_DECORATION 39
-#define CATEGO_LINGE_MAISON 46
-#define CATEGO_BRICOLAGE 21
-#define CATEGO_JARDINAGE 52
-#define CATEGO_VETEMENTS 22
-#define CATEGO_CHAUSSURES 53
-#define CATEGO_ACCESSOIRES_BAGAGERIE 47
-#define CATEGO_MONTRES_BIJOUX 42
-#define CATEGO_EQUIPEMENT_BEBE 23
-#define CATEGO_VETEMENTS_BEBE 54
-#define CATEGO_LOISIRS 24
-#define CATEGO_DVD_FILMS 25
-#define CATEGO_CD_MUSIQUE 26
-#define CATEGO_LIVRES 27
-#define CATEGO_ANIMAUX 28
-#define CATEGO_VELOS 55
-#define CATEGO_SPORTS_HOBBIES 29
-#define CATEGO_INSTRUMENTS_MUSIQUE 30
-#define CATEGO_COLLECTION 40
-#define CATEGO_JEUX_JOUETS 41
-#define CATEGO_VINS_GASTRONOMIE 48
-#define CATEGO_EMPLOI_SERVICES 31
-#define CATEGO_MATERIEL_PROFESSIONNEL 32
-#define CATEGO_EMPLOI 33
-#define CATEGO_SERVICES 34
-#define CATEGO_BILLETTERIE 35
-#define CATEGO_EVENEMENTS 49 
-#define CATEGO_COURS_PARTICULIERS 36
-#define CATEGO_NONE 37
-#define CATEGO_AUTRES 38
+#define CATEGO_ALL "annonces"
+#define CATEGO_VEHICULES "_vehicules_"
+#define CATEGO_VOITURES "voitures"
+#define CATEGO_MOTO "moto"
+#define CATEGO_CARAVANING "caravaning"
+#define CATEGO_UTILITAIRES "utilitaires"
+#define CATEGO_EQUIPEMENT_AUTO "equipement_auto"
+#define CATEGO_EQUIPEMENT_MOTO "equipement_moto"
+#define CATEGO_EQUIPEMENT_CARAVANING "equipement_caravaning"
+#define CATEGO_NAUTISME "nautisme"
+#define CATEGO_EQUIPEMENT_NAUTISME "equipement_nautisme"
+#define CATEGO_IMMOBILIER "_immobilier_"
+#define CATEGO_VENTE_IMMOBILIERES "ventes_immobilieres"
+#define CATEGO_LOCATION "locations"
+#define CATEGO_COLOCATION "colocations"
+#define CATEGO_LOCATION_VACANCES "locations_de_vacances"
+#define CATEGO_BUREAUX_COMMERCES "bureaux_commerces"
+#define CATEGO_MULTIMEDIA "_multimedia_"
+#define CATEGO_CONSOLES_JEUX_VIDEO "consoles_jeux_video"
+#define CATEGO_INFORMATIQUE "informatique"
+#define CATEGO_IMAGE_SON "image_son"
+#define CATEGO_TELEPHONIE "telephonie"
+#define CATEGO_MAISON "_maison_"
+#define CATEGO_AMEUBLEMENT "ameublement"
+#define CATEGO_ELECTROMENAGER "electromenager"
+#define CATEGO_ART_TABLE "arts_de_la_table"
+#define CATEGO_DECORATION "decoration"
+#define CATEGO_LINGE_MAISON "linge_de_maison"
+#define CATEGO_BRICOLAGE "bricolage"
+#define CATEGO_JARDINAGE "jardinage"
+#define CATEGO_VETEMENTS "vetements"
+#define CATEGO_CHAUSSURES "chaussures"
+#define CATEGO_ACCESSOIRES_BAGAGERIE "accessoires_bagagerie"
+#define CATEGO_MONTRES_BIJOUX "montres_bijoux"
+#define CATEGO_EQUIPEMENT_BEBE "equipement_bebe"
+#define CATEGO_VETEMENTS_BEBE "vetements_bebe"
+#define CATEGO_LOISIRS "_loisirs_"
+#define CATEGO_DVD_FILMS "dvd_films"
+#define CATEGO_CD_MUSIQUE "cd_musique"
+#define CATEGO_LIVRES "livres"
+#define CATEGO_ANIMAUX "animaux"
+#define CATEGO_VELOS "velos"
+#define CATEGO_SPORTS_HOBBIES "sports_hobbies"
+#define CATEGO_INSTRUMENTS_MUSIQUE "instruments_de_musique"
+#define CATEGO_COLLECTION "collection"
+#define CATEGO_JEUX_JOUETS "jeux_jouets"
+#define CATEGO_VINS_GASTRONOMIE "vins_gastronomie"
+#define CATEGO_EMPLOI_SERVICES "_emploi_services_"
+#define CATEGO_MATERIEL_PROFESSIONNEL "_materiel_professionnel_"
+#define CATEGO_EMPLOI "emploi"
+#define CATEGO_SERVICES "services"
+#define CATEGO_BILLETTERIE "billetterie"
+#define CATEGO_EVENEMENTS "evenements"
+#define CATEGO_COURS_PARTICULIERS "cours_particuliers"
+#define CATEGO_NONE "_"
+#define CATEGO_AUTRES "autres"

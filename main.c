@@ -3,10 +3,9 @@
 #include <lbc.h>
 
 int main(int ac, char **av) {
-	char *url = NULL;
-	url = (char *) malloc(sizeof(char)); 
-	getUrl(url, "maison clamart", REGION_ILE_DE_FRANCE);
-	printf("%s\n", url);
-	free(url);
+	lbc_query_t lbcq = { CATEGO_LIVRES, REGION_ILE_DE_FRANCE, "OuiOui" };
+	char *url = (char *) malloc(1024);
+	lbcUrl(lbcq, url);
+	fprintf(stdout, "url: %s\n", url);
 	return 0;
 }
