@@ -8,6 +8,9 @@ int lbcSetQuery(lbc_query_t *lbc_query, char *categorie, char *region, char *que
 	if(!categorie || !region || !query)
 		return -1;
 
+	// TODO:utiliser tbl de * de function pour rendre plus propre cette partie de code
+
+	// Traitement des categories
 	if(0 == strcmp(categorie, "annonces"))
 		lbc_query->categorie = strdup(CATEGO_ALL);
 	else if(0 == strcmp(categorie, "all"))
@@ -130,7 +133,8 @@ int lbcSetQuery(lbc_query_t *lbc_query, char *categorie, char *region, char *que
 		lbc_query->categorie = strdup(CATEGO_AUTRES);
 	else
 		return -1;
-	
+
+	// Traitement des regions	
 	if(0 == strcmp(region, "idf")) 
 		lbc_query->region = strdup(REGION_ILE_DE_FRANCE);
 	else if(0 == strcmp(region, "alsace")) 
